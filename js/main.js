@@ -23,7 +23,7 @@ const decryptText = (text) => {
         text = text.replaceAll(words_replace[i], character_to_replace[i]);
     }
     console.debug(`Decrypted text: ${text}`);
-    
+
     return text;
 }
 
@@ -58,12 +58,31 @@ const decrypt = () => {
 }
 
 
+const copyToClipboard = () => {
+    if (navigator.clipboard) {
+        const str = document.getElementById("encrypted-text").value.trim();
+        navigator.clipboard.writeText(str)
+            .then(() => console.log("Text copied to clipboard"))
+            .catch(err => console.log('Something went wrong', err));
+    } else {
+        alert("API clipboard not supported");
+        console.log("API clipboard not supported");
+    }
+};
+
+
 window.onload = () => {
+    document.getElementById("encrypted-text").value = "";
+    document.getElementById("text-to-encrypt").value = "";
+    document.getElementById("text-to-encrypt").focus();
 
     const encryptButton = document.getElementById("encrypt-button");
     encryptButton.onclick = encrypt;
 
     const decryptButton = document.getElementById("decrypt-button");
     decryptButton.onclick = decrypt;
+
+    const copyButton = document.getElementById("copy-button");
+    copyButton.onclick = copyToClipboard;
 
 }  

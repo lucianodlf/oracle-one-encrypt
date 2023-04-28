@@ -1,0 +1,21 @@
+{
+  "name": "oracle-one-encrypt",
+  "version": "1.0.0",
+  "description": "Challenge of OracleONE and Alura learning program",
+  "main": "",
+  "repository": {
+    "url": "git@github.com:lucianodlf/oracle-one-encrypt.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Luciano Delfino",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.39.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-promise": "^6.1.1"
+  }
+}

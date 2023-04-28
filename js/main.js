@@ -6,9 +6,9 @@ const words_replace = ["enter", "imes", "ai", "ober", "ufat"];
 
 const verifyCharacters = (text) => {
     /* Regex que permite solo letras minusculas, sin acentos, sin caracteres especiales */
-    const regex = /^[a-z\s]*$/
-    return regex.test(text);
-}
+    const regex = /^[a-z\s]*$/;
+    return text && regex.test(text);
+};
 
 const encrypText = (text) => {
     for (let i = 0; i < character_to_replace.length; i++) {
@@ -16,7 +16,7 @@ const encrypText = (text) => {
     }
     console.debug(`Encrypted text: ${text}`);
     return text;
-}
+};
 
 const decryptText = (text) => {
     for (let i = 0; i < words_replace.length; i++) {
@@ -25,26 +25,40 @@ const decryptText = (text) => {
     console.debug(`Decrypted text: ${text}`);
 
     return text;
-}
+};
 
 const encrypt = () => {
-    const text = document.getElementById("text-to-encrypt").value.trim();
+    resetStyleTexarea("text-to-encrypt");
+    resetStyleButton("encrypt-button");
+    resetStyleButton("decrypt-button");
+
+    const text = document.getElementById("text-to-encrypt").value.trim().toLowerCase();
     console.debug(`Text to encrypt: ${text}`);
+    document.getElementById("text-to-encrypt").value = text;
 
     if (!verifyCharacters(text)) {
-        alert("Texto invalido");
+        console.error("Text invalid");
+        document.getElementById("notification").innerHTML = "Solo se admiten caracteres alfabeticos sin acentos.";
+        document.getElementById("text-to-encrypt").classList.replace("w3-border-black", "w3-border-red");
+        document.getElementById("text-to-encrypt").classList.add("w3-animate-opacity");
         return;
     }
 
     const encryptedText = encrypText(text);
     document.getElementById("encrypted-text").value = encryptedText;
+    setSuccessStyleButton("encrypt-button");
 
     return;
-}
+};
 
 const decrypt = () => {
-    const text = document.getElementById("text-to-encrypt").value.trim();
+    resetStyleTexarea("encrypted-text");
+    resetStyleButton("decrypt-button");
+    resetStyleButton("encrypt-button");
+
+    const text = document.getElementById("text-to-encrypt").value.trim().toLowerCase();
     console.debug(`Text to decrypt: ${text}`);
+    document.getElementById("text-to-encrypt").value = text;
 
     if (!verifyCharacters(text)) {
         alert("Texto invalido");
@@ -53,17 +67,38 @@ const decrypt = () => {
 
     const decryptedText = decryptText(text);
     document.getElementById("encrypted-text").value = decryptedText;
-
+    setSuccessStyleButton("decrypt-button");
     return;
-}
+};
 
+
+const setSuccessStyleButton = (idElement) => {
+    document.getElementById(idElement).classList.add("w3-border");
+    document.getElementById(idElement).classList.add("w3-border-green");
+    document.getElementById(idElement).classList.remove("w3-dark-grey");
+    document.getElementById(idElement).classList.add("w3-green");
+    document.getElementById(idElement).classList.add("w3-animate-opacity");
+
+};
+
+const resetStyleButton = (idElement) => {
+    document.getElementById(idElement).classList.remove("w3-border");
+    document.getElementById(idElement).classList.remove("w3-border-green");
+    document.getElementById(idElement).classList.remove("w3-green");
+    document.getElementById(idElement).classList.add("w3-dark-grey");
+};
+
+const resetStyleTexarea = (idElement) => {
+    document.getElementById(idElement).classList.replace("w3-border-red","w3-border-black");
+    document.getElementById(idElement).classList.remove("w3-animate-opacity");
+};
 
 const copyToClipboard = () => {
     if (navigator.clipboard) {
         const str = document.getElementById("encrypted-text").value.trim();
         navigator.clipboard.writeText(str)
             .then(() => console.log("Text copied to clipboard"))
-            .catch(err => console.log('Something went wrong', err));
+            .catch(err => console.log("Something went wrong", err));
     } else {
         alert("API clipboard not supported");
         console.log("API clipboard not supported");
@@ -85,4 +120,12 @@ window.onload = () => {
     const copyButton = document.getElementById("copy-button");
     copyButton.onclick = copyToClipboard;
 
-}  
+    const textToEncrypt = document.getElementById("text-to-encrypt");
+    textToEncrypt.onkeyup = () => {
+        document.getElementById("notification").innerHTML = "";
+        document.getElementById("encrypted-text").value = "";
+
+        resetStyleButton("encrypt-button");
+        resetStyleButton("decrypt-button");
+    }; 
+};  

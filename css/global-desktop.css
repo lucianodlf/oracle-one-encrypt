@@ -1,0 +1,7 @@
+textarea{
+    resize: none;
+}
+
+.text-error{
+   border: 2px solid red !important; 
+}

@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Encrypter/Decrypter</title>
+    <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/global-desktop.css">
     <link rel="stylesheet" href="./css/w3.css">
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
@@ -32,7 +33,9 @@
                 <h3>Enter text to encrypt or decrypt</h3><br>
                 <i class="fa-solid fa-keyboard fa-bounce w3-margin-bottom w3-text-theme"
                     style="color: #33d17a; font-size: 50px;"></i>
-                <textarea class="w3-input w3-border" name="text-to-encrypt" id="text-to-encrypt" cols="30" rows="10"
+                <div id="notification" class="w3-text-red" style="visibility: visible;"></div>
+                <textarea class="w3-input w3-border w3-round-large w3-border-black w3-hover-border-dark-gray text-error"
+                    name="text-to-encrypt" id="text-to-encrypt" cols="30" rows="10"
                     placeholder="Write here the text to encrypt... &#10;Or write a encrypted text to decrypt..."></textarea>
                 <button id="encrypt-button"
                     class="w3-btn w3-round-xlarge w3-large w3-left-align w3-dark-grey w3-hover-light-grey w3-margin-top"
@@ -52,8 +55,8 @@
                 <h3>Result</h3><br>
                 <i class="fa-solid fa-message w3-margin-bottom w3-text-theme"
                     style="color: #33d17a; font-size: 50px;"></i>
-                <textarea class="w3-input w3-border" name="encrypted-text" id="encrypted-text" cols="30" rows="10"
-                    readonly></textarea>
+                <textarea class="w3-input w3-border w3-round-large w3-border-black" name="encrypted-text"
+                    id="encrypted-text" cols="30" rows="10" readonly></textarea>
                 <button id="copy-button"
                     class="w3-btn w3-round-xlarge w3-large w3-left-align w3-dark-grey w3-hover-light-grey w3-margin-top"
                     style="font-weight: bold;"><i class="fa-solid fa-copy"></i> Copy

@@ -5,3 +5,8 @@ textarea{
 .text-error{
    border: 2px solid red !important; 
 }
+
+.social-link{
+    font-size: x-large;
+    margin: 4px;
+}
